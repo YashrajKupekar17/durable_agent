@@ -280,3 +280,7 @@ class AgentGoalWorkflow:
     def get_latest_tool_data(self) -> Optional[ToolData]:
         """Query handler to retrieve the latest tool data response if available."""
         return self.tool_data
+    
+
+
+
