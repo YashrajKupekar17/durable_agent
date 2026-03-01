@@ -2,6 +2,9 @@ import tools.tool_registry as tool_registry
 from models.core import AgentGoal
 
 goal_event_flight_invoice = AgentGoal(
+    id="event_flight_invoice",                          # add this
+    category_tag="travel",                              # add this
+    agent_friendly_description="Book flights to events and generate invoices",  # add this
     agent_name="North America Event Flight Booking",
     tools=[
         tool_registry.find_events_tool,
