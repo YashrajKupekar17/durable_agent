@@ -195,7 +195,7 @@ export default function App() {
 
     return (
         <div className="flex flex-col h-screen">
-            <NavBar title="Temporal AI Agent 🤖" />
+            <NavBar title="Webpage Builder" />
 
             {error.visible && (
                 <div className="fixed top-16 left-1/2 transform -translate-x-1/2 

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Portfolio</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #E0E0E0;
+            line-height: 1.6;
+        }
+        header, footer {
+            background-color: #1F1F1F;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+        nav a {
+            margin: 0 1rem;
+            color: #BB86FC;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #03DAC5;
+        }
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        section {
+            margin-bottom: 4rem;
+        }
+        .projects article {
+            background-color: #1F1F1F;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            transition: background-color 0.3s;
+        }
+        .projects article:hover {
+            background-color: #2C2C2C;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border: none;
+            border-radius: 4px;
+            background-color: #2C2C2C;
+            color: #E0E0E0;
+        }
+        .contact-form textarea {
+            resize: none;
+            height: 150px;
+        }
+        .contact-form button {
+            background-color: #BB86FC;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            color: #1F1F1F;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .contact-form button:hover {
+            background-color: #03DAC5;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <h1>Developer Portfolio</h1>
+    <nav>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<main>
+    <section id="projects">
+        <h2>Projects</h2>
+        <article>
+            <h3>Project One</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel rhoncus libero.</p>
+        </article>
+        <article>
+            <h3>Project Two</h3>
+            <p>Suspendisse potenti. Phasellus vehicula, risus sit amet interdum convallis, dui augue vulputate leo.</p>
+        </article>
+        <article>
+            <h3>Project Three</h3>
+            <p>Curabitur in libero nec ligula fermentum finibus. Fusce tincidunt, nulla vel tincidunt tristique.</p>
+        </article>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+</main>
+
+<footer>
+    &copy; 2023 Developer Portfolio
+</footer>
+
+<script>
+    function handleSubmit(event) {
+        event.preventDefault();
+        alert('Message sent!');
+    }
+</script>
+
+</body>
+</html>

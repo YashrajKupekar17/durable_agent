@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chill Minimal Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&family=Raleway:wght@700&display=swap" rel="stylesheet">
+<style>
+button:hover { background-color: #ca6b1c; } /* Replace darken calculation with fixed hex */
+
+body.dark-mode {
+  background-color: #333;
+  color: #ccc;
+}
+
+/* Additional styles needed for .dark-mode if needed */
+</style>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="main-navigation">
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#posts">Posts</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="site-main">
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <img src="placeholder.jpg" alt="Engaging introductory image" class="hero-image">
+                <h1 class="hero-headline">Main Headline</h1>
+                <h2 class="hero-subheadline">Subheadline</h2>
+            </div>
+        </section>
+        <section id="about" class="about-section">
+            <div class="about-content">
+                <p class="about-text">[Brief background about the blog and its focus]</p>
+                <img src="placeholder.jpg" alt="About section image" class="about-image">
+            </div>
+        </section>
+        <section id="posts" class="posts-section">
+            <div class="post-card">
+                <h3 class="post-title">Post Title</h3>
+                <p class="post-date">Date</p>
+                <p class="post-preview">Post preview content...</p>
+            </div>
+            <!-- Repeat post-card for additional posts -->
+        </section>
+        <section id="contact" class="contact-section">
+            <form class="contact-form" action="#">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required>
+                
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Your email" required>
+                
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Your message" required></textarea>
+                
+                <button type="submit">Send</button>
+            </form>
+            <div class="social-links">
+                <a href="#" class="social-link">Twitter</a>
+                <a href="#" class="social-link">Facebook</a>
+                <!-- Add more social links as needed -->
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <p>&copy; 2023 Chill Minimal Blog</p>
+    </footer>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Dark Mode Toggle
+    const toggleDarkMode = document.createElement('button');
+    toggleDarkMode.setAttribute('aria-label', 'Toggle Dark Mode');
+    toggleDarkMode.style.position = 'fixed';
+    toggleDarkMode.style.top = '10px';
+    toggleDarkMode.style.right = '10px';
+    document.body.appendChild(toggleDarkMode);
+
+    const darkModeClass = 'dark-mode';
+    const currentMode = localStorage.getItem('theme');
+    if (currentMode === 'dark') {
+        document.body.classList.add(darkModeClass);
+    }
+
+    toggleDarkMode.addEventListener('click', function () {
+        document.body.classList.toggle(darkModeClass);
+        if (document.body.classList.contains(darkModeClass)) {
+            localStorage.setItem('theme', 'dark');
+        } else {
+            localStorage.setItem('theme', 'light');
+        }
+    });
+
+    // Responsive Menu for Mobile Navigation
+    const nav = document.querySelector('.main-navigation');
+    const menuToggle = document.createElement('button');
+    menuToggle.setAttribute('aria-label', 'Toggle Navigation');
+    menuToggle.innerHTML = '☰'; // hamburger icon
+    menuToggle.style.position = 'fixed';
+    menuToggle.style.top = '10px';
+    menuToggle.style.left = '10px';
+    nav.style.display = 'none';
+    nav.parentNode.insertBefore(menuToggle, nav);
+
+    let menuOpen = false;
+    menuToggle.addEventListener('click', function () {
+        menuOpen = !menuOpen;
+        nav.style.display = menuOpen ? 'block' : 'none';
+    });
+
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function () {
+            nav.style.display = 'none';
+            menuOpen = false;
+        });
+    });
+
+    // Ensure nav is displayed correctly on window resize
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 768) { // Use consistent breakpoint for CSS and JS
+            nav.style.display = 'block';
+        } else if (!menuOpen) {
+            nav.style.display = 'none';
+        }
+    });
+});
+</script>
+</body>
+</html>

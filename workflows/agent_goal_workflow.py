@@ -33,6 +33,16 @@ MAX_TURNS_BEFORE_CONTINUE = 250
 class AgentGoalWorkflow:
     """Workflow that manages tool execution with user confirmation and conversation history."""
 
+    # Maps tool result keys -> tool arg keys that should be auto-injected
+    _ARTIFACT_KEYS = {
+        "spec": "spec",           # GatherRequirements -> PlanWebpage, BuildStructure
+        "plan": "plan",           # PlanWebpage -> BuildStructure, BuildStyles, BuildInteractivity
+        "html": "html",           # BuildStructure/QualityCheck -> BuildStyles, BuildInteractivity, QualityCheck, AssembleWebpage
+        "css": "css",             # BuildStyles/QualityCheck -> QualityCheck, AssembleWebpage
+        "js": "js",               # BuildInteractivity/QualityCheck -> QualityCheck, AssembleWebpage
+        "html_content": "htmlContent",  # AssembleWebpage -> SaveWebpage; also RefineWebpage result
+    }
+
     def __init__(self) -> None:
         self.conversation_history: ConversationHistory = {"messages": []}
         self.prompt_queue: Deque[str] = deque()
@@ -46,6 +56,8 @@ class AgentGoalWorkflow:
         self.confirmed: bool = (
             False  # indicates that we have confirmation to proceed to run tool
         )
+        # Stores latest large artifacts so tools get real data, not truncated LLM summaries
+        self.artifacts: Dict[str, Any] = {}
 
     # see ../api/main.py#temporal_client.start_workflow() for how the input parameters are set
     @workflow.run
@@ -202,6 +214,25 @@ class AgentGoalWorkflow:
         )
         self.show_tool_args_confirmation = env_output.show_confirm
 
+    def _capture_artifacts(self, tool_result: Dict[str, Any]) -> None:
+        """Store large outputs from tool results for injection into later tools."""
+        for result_key, arg_key in self._ARTIFACT_KEYS.items():
+            if result_key in tool_result and tool_result[result_key]:
+                self.artifacts[arg_key] = tool_result[result_key]
+
+    def _inject_artifacts(self, args: Dict[str, Any]) -> Dict[str, Any]:
+        """Replace truncated/placeholder LLM args with real artifact data."""
+        injected = dict(args)
+        for arg_key, real_value in self.artifacts.items():
+            if arg_key in injected:
+                current = injected[arg_key]
+                # Replace if the LLM put a truncated string, None, or a short placeholder
+                if (current is None
+                    or (isinstance(current, str) and "[truncated" in current)
+                    or (isinstance(current, str) and len(current) < 50 and isinstance(real_value, (str, dict)) and (isinstance(real_value, dict) or len(real_value) > 50))):
+                    injected[arg_key] = real_value
+        return injected
+
     # define if we're ready for tool execution
     def ready_for_tool_execution(self) -> bool:
 
@@ -216,6 +247,10 @@ class AgentGoalWorkflow:
             f"workflow step: user has confirmed, executing the tool {current_tool}"
         )
         self.confirmed = False
+
+        # Inject real artifact data into args before execution
+        self.tool_data["args"] = self._inject_artifacts(self.tool_data.get("args", {}))
+
         confirmed_tool_data = self.tool_data.copy()
         confirmed_tool_data["next"] = "confirm"
         self.add_message("user_confirmed_tool_run", confirmed_tool_data)
@@ -227,6 +262,11 @@ class AgentGoalWorkflow:
             self.add_message,
             self.prompt_queue,
         )
+
+        # Capture artifacts from the tool result (last message in history)
+        last_msg = self.conversation_history["messages"][-1]
+        if last_msg["actor"] == "tool_result" and isinstance(last_msg["response"], dict):
+            self._capture_artifacts(last_msg["response"])
 
         self.waiting_for_confirm = False
 

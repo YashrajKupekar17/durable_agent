@@ -74,7 +74,13 @@ const ConfirmInline = memo(({ data, confirmed, onConfirm }) => {
       );
     }
 
-    return <span className="font-medium text-gray-800 dark:text-gray-100">{String(value)}</span>;
+    const str = String(value);
+const isTooLong = str.length > 120;
+return (
+  <span className="font-medium text-gray-800 dark:text-gray-100">
+    {isTooLong ? str.slice(0, 120) + "…" : str}
+  </span>
+);
   };
 
   const cardBase =

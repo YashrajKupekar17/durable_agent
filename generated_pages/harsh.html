@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Buttons</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5dc;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .button-container {
+            display: flex;
+            gap: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button.green {
+            background-color: #4CAF50;
+        }
+        button.green:hover {
+            background-color: #45a049;
+        }
+        button.yellow {
+            background-color: #FFEB3B;
+            color: #000;
+        }
+        button.yellow:hover {
+            background-color: #FDD835;
+        }
+        button.black {
+            background-color: #000;
+        }
+        button.black:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button class="green" onclick="alert('Green button clicked!')">Green Button</button>
+        <button class="yellow" onclick="alert('Yellow button clicked!')">Yellow Button</button>
+        <button class="black" onclick="alert('Black button clicked!')">Black Button</button>
+    </div>
+    <script>
+        // You can add any JavaScript functionality here if needed
+    </script>
+</body>
+</html>

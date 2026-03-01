@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #e09, #d0e);
+            color: #333;
+        }
+
+        header {
+            position: relative;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #e09;
+        }
+
+        header p {
+            margin: 10px 0 0;
+            font-size: 1.1em;
+            font-weight: 300;
+        }
+
+        nav {
+            margin-top: 15px;
+        }
+
+        nav a {
+            color: #e09;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 300;
+        }
+
+        section#hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 70vh;
+            text-align: center;
+            background: url('https://source.unsplash.com/random/1600x900?shopping') center/cover no-repeat;
+            color: #fff;
+            padding: 20px;
+            box-shadow: inset 0 0 2000px rgba(0, 0, 0, 0.5);
+        }
+
+        section#hero h2 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        section#hero p {
+            font-size: 1.2em;
+            margin: 15px 0;
+        }
+
+        section#features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 40px 10%;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .feature-card h3 {
+            margin-top: 0;
+            color: #d0e;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1em;
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>E-Shop Paradise</h1>
+        <p>Your one-stop online shop for everything cool and chill.</p>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Shop</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h2>Find Your Perfect Style</h2>
+            <p>Discover the latest trends in fashion, electronics, and more!</p>
+        </section>
+
+        <section id="features">
+            <div class="feature-card">
+                <h3>Free Shipping</h3>
+                <p>Enjoy free shipping on all orders over $50. Terms apply.</p>
+            </div>
+            <div class="feature-card">
+                <h3>24/7 Support</h3>
+                <p>Our customer support team is here to help you anytime.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Money Back Guarantee</h3>
+                <p>If you're not satisfied, get a full refund within 30 days.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 E-Shop Paradise. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // You can add interactivity here if needed
+        });
+    </script>
+</body>
+
+</html>

@@ -1,3 +1,4 @@
+import copy
 import json
 from typing import Optional
 
@@ -10,6 +11,26 @@ from prompts.prompts import (
     TOOLCHAIN_COMPLETE_GUIDANCE_PROMPT,
 )
 
+# Keys whose values are large code blobs the LLM planner doesn't need in full
+_LARGE_KEYS = {"html", "css", "js", "html_content", "htmlContent", "currentHtml",
+               "fixedHtml", "fixedCss", "fixedJs"}
+_TRUNCATE_LIMIT = 200  # chars to keep as preview
+
+
+def _truncate_large_values(obj, depth=0):
+    """Recursively truncate large code values so the LLM prompt stays within TPM limits."""
+    if isinstance(obj, dict):
+        result = {}
+        for k, v in obj.items():
+            if k in _LARGE_KEYS and isinstance(v, str) and len(v) > _TRUNCATE_LIMIT:
+                result[k] = v[:_TRUNCATE_LIMIT] + f"... [truncated, {len(v)} chars total]"
+            else:
+                result[k] = _truncate_large_values(v, depth + 1)
+        return result
+    elif isinstance(obj, list):
+        return [_truncate_large_values(item, depth + 1) for item in obj]
+    return obj
+
 
 def generate_genai_prompt(
     agent_goal: AgentGoal,
@@ -21,10 +42,13 @@ def generate_genai_prompt(
     with the provided tools and conversation history.
     """
 
+    # Truncate large code blobs so the prompt fits within TPM limits
+    trimmed_history = _truncate_large_values(copy.deepcopy(conversation_history))
+
     # Prepare template variables
     template_vars = {
         "agent_goal": agent_goal,
-        "conversation_history_json": json.dumps(conversation_history, indent=2),
+        "conversation_history_json": json.dumps(trimmed_history, indent=2),
         "toolchain_complete_guidance": TOOLCHAIN_COMPLETE_GUIDANCE_PROMPT,
         "raw_json": raw_json,
         "raw_json_str": (
@@ -46,8 +70,9 @@ def generate_tool_completion_prompt(current_tool: str, dynamic_result: dict) -> 
     Returns:
         str: A formatted prompt string for the agent to process the tool completion
     """
+    trimmed_result = _truncate_large_values(dynamic_result)
     return TOOL_COMPLETION_PROMPT.format(
-        current_tool=current_tool, dynamic_result=dynamic_result
+        current_tool=current_tool, dynamic_result=trimmed_result
     )
 
 

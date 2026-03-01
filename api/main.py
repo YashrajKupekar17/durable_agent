@@ -12,7 +12,7 @@ from temporalio.exceptions import TemporalError
 
 from models.requests import AgentGoalWorkflowParams, CombinedInput, ConversationHistory
 from shared.config import TEMPORAL_TASK_QUEUE, get_temporal_client
-from tools.goal_registry import goal_event_flight_invoice
+from tools.goal_registry import goal_webpage_builder
 from workflows.agent_goal_workflow import AgentGoalWorkflow
 
 
@@ -32,7 +32,7 @@ app = FastAPI(lifespan=lifespan)
 # Load environment variables
 load_dotenv()
 
-AGENT_GOAL = goal_event_flight_invoice
+AGENT_GOAL = goal_webpage_builder
 
 app.add_middleware(
     CORSMiddleware,
@@ -170,3 +170,14 @@ async def get_conversation_history() -> ConversationHistory:
             raise HTTPException(
                 status_code=500, detail="Internal server error while querying workflow."
             )
+        
+from fastapi.responses import FileResponse
+import os
+
+@app.get("/preview/{filename}")
+async def preview_webpage(filename: str) -> FileResponse:
+    """Serves a generated HTML file for preview."""
+    filepath = os.path.join(os.getcwd(), "generated_pages", filename)
+    if not os.path.exists(filepath):
+        raise HTTPException(status_code=404, detail="File not found")
+    return FileResponse(filepath, media_type="text/html")

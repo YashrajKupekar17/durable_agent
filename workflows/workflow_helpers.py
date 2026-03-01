@@ -14,10 +14,10 @@ with workflow.unsafe.imports_passed_through():
     )
 
 
-TOOL_ACTIVITY_START_TO_CLOSE_TIMEOUT = timedelta(seconds=30)
-TOOL_ACTIVITY_SCHEDULE_TO_CLOSE_TIMEOUT = timedelta(minutes=30)
-LLM_ACTIVITY_START_TO_CLOSE_TIMEOUT = timedelta(seconds=30)
-LLM_ACTIVITY_SCHEDULE_TO_CLOSE_TIMEOUT = timedelta(minutes=30)
+TOOL_ACTIVITY_START_TO_CLOSE_TIMEOUT = timedelta(seconds=1200)
+TOOL_ACTIVITY_SCHEDULE_TO_CLOSE_TIMEOUT = timedelta(minutes=1200)
+LLM_ACTIVITY_START_TO_CLOSE_TIMEOUT = timedelta(seconds=1200)
+LLM_ACTIVITY_SCHEDULE_TO_CLOSE_TIMEOUT = timedelta(minutes=1200)
 
 
 async def handle_tool_execution(

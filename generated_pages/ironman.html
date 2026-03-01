@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IronMind Fitness Coaching</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #b71c1c, #ff8f00);
+            color: #fff;
+            text-align: center;
+            padding: 50px 0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            font-weight: 600;
+        }
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        #features, #testimonials, #pricing {
+            padding: 60px 20px;
+            text-align: center;
+        }
+        h2 {
+            font-size: 2.5rem;
+            color: #b71c1c;
+            margin-bottom: 20px;
+        }
+        #features .feature-item {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .feature {
+            max-width: 30%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #testimonials .testimonial {
+            max-width: 80%;
+            margin: 0 auto;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #pricing .pricing-plan {
+            display: inline-block;
+            max-width: 30%;
+            background-color: #fff;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .price {
+            font-size: 2rem;
+            color: #ff8f00;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            .feature-item {
+                flex-direction: column;
+            }
+            .feature, .pricing-plan {
+                max-width: 90%;
+                margin: 10px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>IronMind Fitness Coaching</h1>
+        <p>Unleash your inner strength and achieve your fitness goals with us</p>
+    </header>
+
+    <section id="features">
+        <h2>Features</h2>
+        <div class="feature-item">
+            <div class="feature">
+                <h3>Personalized Plans</h3>
+                <p>Customized workout plans tailored to suit your needs and goals.</p>
+            </div>
+            <div class="feature">
+                <h3>Expert Coaches</h3>
+                <p>Learn from certified professionals to maximize your workout efficiency.</p>
+            </div>
+            <div class="feature">
+                <h3>24/7 Support</h3>
+                <p>Get support whenever you need it from our dedicated team.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <h2>Testimonials</h2>
+        <div class="testimonial">
+            <p>"IronMind coaches helped me transform my body and mind. Highly recommended!"</p>
+            <p>- Alex J.</p>
+        </div>
+        <div class="testimonial">
+            <p>"A phenomenal experience! I achieved more in 6 months than I ever thought possible."</p>
+            <p>- Jamie T.</p>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <h2>Pricing</h2>
+        <div class="pricing-plan">
+            <h3>Basic</h3>
+            <p class="price">$19/mo</p>
+            <p>Includes personalized plans and weekly check-ins.</p>
+        </div>
+        <div class="pricing-plan">
+            <h3>Standard</h3>
+            <p class="price">$49/mo</p>
+            <p>Everything in Basic, plus one-on-one coaching sessions.</p>
+        </div>
+        <div class="pricing-plan">
+            <h3>Premium</h3>
+            <p class="price">$99/mo</p>
+            <p>All Standard features, with daily coaching and meal plans.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 IronMind Fitness Coaching | All Rights Reserved</p>
+    </footer>
+</body>
+</html>
